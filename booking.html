@@ -1,0 +1,26 @@
+<!--- file booking.html -->
+<HTML XMLns="http://www.w3.org/1999/xHTML"> 
+    <head> 
+    <title>CabsOnline</title> 
+    <script type="text/javascript" src="booking.js"></script>
+    </head> 
+    <body>
+    <H1>CabsOnline</H1>
+    <form>
+            <label>Customer Name:  <input type="text" name="namefield"> </label>
+            <label><br>Phone Number: <input type="text" name="pwdfield"> <br></label>
+            <label><br>Unit Number: <input type="text" name="pwdfield"> <br></label>
+            <label><br>Street Number: <input type="text" name="pwdfield"> <br></label>
+            <label><br>Street Name: <input type="text" name="pwdfield"> <br></label>
+            <label><br>Suburb: <input type="text" name="pwdfield"> <br></label>
+            <label><br>Destination Suburb: <input type="text" name="pwdfield"> <br></label>
+            <label><br>Pick-Up Date: <input type="text" name="pwdfield"> <br></label>
+            <label><br>Pick-Up Time: <input type="text" name="pwdfield"> <br></label>
+        <input name="submit" type = "button" onClick = "getData('data.php','targetDiv', namefield.value, pwdfield.value) " value = "Fetch from server">
+    </form>
+    <div id="targetDiv"> 
+        <p>The fetched data will go here.</p>  
+    </div> 
+    </body> 
+</HTML>
+  

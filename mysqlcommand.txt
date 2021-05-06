@@ -1,0 +1,8 @@
+Because it is not specified in the Assignment requirements
+whether the lecturer wants the sql table to be created from
+the sql server side or from the code written for this assignment.
+Since the requirements states we need to draft this txt document
+for this assignment. I assume we are creating the tables from
+the command line, not in the code. Here are the list of sql queries
+I used in creating those tables:
+
