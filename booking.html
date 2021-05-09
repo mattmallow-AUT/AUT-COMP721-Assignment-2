@@ -1,27 +1,27 @@
 <!--- file booking.html -->
+<!DOCTYPE html>
 <HTML XMLns="http://www.w3.org/1999/xHTML"> 
     <head> 
-    <title>CabsOnline</title> 
-    <script type="text/javascript" src="booking.js"></script>
+        <title>CabsOnline</title> 
+        <script type="text/javascript" src="booking.js"></script>
     </head> 
     
-    <body>
-    <H1>CabsOnline</H1>
-    <form>
-        <label>Customer Name:  <input type="text" name="cname" required/> </label>
-        <label><br>Phone Number: <input type="text" name="phone" pattern="^\d{10,12}$" required/> <br></label>
-        <label><br>Unit Number: <input type="text" name="unumber"> <br></label>
-        <label><br>Street Number: <input type="text" name="snumber" required/> <br></label>
-        <label><br>Street Name: <input type="text" name="stname" required/> <br></label>
-        <label><br>Suburb: <input type="text" name="sbname"> <br></label>
-        <label><br>Destination Suburb: <input type="text" name="dsbname"> <br></label>
-        <label><br>Pick-Up Date: <input type="date" name="date" id="displayDate" required/> <br></label>
-        <label><br>Pick-Up Time: <input type="time" name="pwdfield"> <br></label>
-        <input name="submit" type = "button" onClick = "getData('booking.php','targetDiv', namefield.value, pwdfield.value) " value = "Fetch from server">
-    </form>
-    <div id="targetDiv"> 
-        <p>The fetched data will go here.</p>  
-    </div> 
-    </body> 
+    <body onload="getDate(); getTime()">
+        <H1>CabsOnline</H1>
+        <form>
+            <label>Customer Name:  <input type="text" name="cname" required/> </label>
+            <label><br>Phone Number: <input type="text" name="phone" pattern="^\d{10,12}$" required/> <br></label>
+            <label><br>Unit Number: <input type="text" name="unumber"> <br></label>
+            <label><br>Street Number: <input type="text" name="snumber" required/> <br></label>
+            <label><br>Street Name: <input type="text" name="stname" required/> <br></label>
+            <label><br>Suburb: <input type="text" name="sbname"> <br></label>
+            <label><br>Destination Suburb: <input type="text" name="dsbname"> <br></label>
+            <label><br>Pick-Up Date: <input type="date" name="date" id="displayDate" required/> <br></label>
+            <label><br>Pick-Up Time: <input type="time" name="time" id="displayTime"> <br></label>
+            <input name="submit" type = "button" onClick = "PHW('targetDiv')" value = "Fetch from server">
+        </form>
+        <div id="targetDiv"> 
+            <p>The fetched data will go here.</p>
+        </div>
+    </body>
 </HTML>
-  
