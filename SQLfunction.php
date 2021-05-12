@@ -2,9 +2,19 @@
     require_once("../../conf/settings.php");
 
     function checkReferenceFunction($conn, $sql_table) {
-        $searchQuery = "SELECT * FROM $sql_table ORDER BY \"bookingRefNo\" DESC LIMIT 1";
+        $searchQuery = "SELECT * FROM $sql_table ORDER BY bookingRefNo DESC LIMIT 1";
         $result = @mysqli_query($conn, $searchQuery);
-        return $result->num_rows;
+        return $result;
+    }
+
+    function getReference($conn, $sql_table) {
+        $searchQuery = "SELECT bookingRefNo FROM $sql_table ORDER BY bookingRefNo DESC LIMIT 1";
+        $result = @mysqli_query($conn, $searchQuery);
+        
+        while($row = $result->fetch_assoc())
+        {
+            return $row['bookingRefNo'];
+        }
     }
 
     function book($conn, $sql_table, $referenceNumber, $customerName, $phoneNumber,$unitNumber, $streetNumber,$streetName,$suburb,$destinationSuburb,$pickUpDate,$pickUpTime,$status) {

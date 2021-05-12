@@ -27,20 +27,19 @@
 	//fetching from the database, then generate an unique reference number
 	$chechReference = checkReferenceFunction($conn, $sql_table);
 
-	//assign reference number to entry
-	if($chechReference === 0) {
+	//Generate Unique Reference Number
+	if($chechReference->num_rows === 0) {
 		$referenceNumber = 1;
 		echo("Reference Number: $referenceNumber");
 	} else {
-		$referenceNumber = $chechReference+1;
-		echo("Reference Number: $referenceNumber");
+		$referenceNumber = getReference($conn, $sql_table) + 1;
 	}
 
 	//format date and time to MySQL DATETIME
 	$pickUpDate = date('Y-m-d', strtotime($pickUpDate));
 	$pickUpTime = date('H:i:s', strtotime($pickUpTime));
 
-	echo("$pickUpDate and $pickUpTime");
+	echo("<p>$pickUpDate and $pickUpTime</p>");
 
 	if(book(
 		$conn, 

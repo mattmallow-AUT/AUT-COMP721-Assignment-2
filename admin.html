@@ -1,0 +1,39 @@
+<!--- file booking.html -->
+<!DOCTYPE html>
+<HTML XMLns="http://www.w3.org/1999/xHTML"> 
+    <head> 
+        <title>
+            CabsOnline - Your cab is right next to you
+        </title>
+
+        <meta name="description" content="CabsOnline - Your cab is right next to you."/>
+        <meta name="author" content="Matthew Fan"/>
+        <!--<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.2/css/bulma.min.css">-->
+        <script type="text/javascript" src="booking.js"></script>
+    </head> 
+    
+    <body>
+        <form action="javascript:searchBooking()">
+            <H1>CabsOnline | Admin View</H1>
+            <p>Your passenger is right next to you.</p>
+                
+            <label>
+                Search Booking:
+                <input 
+                    type="text" 
+                    name="bsearch" 
+                    id="bsearch"
+                />
+            </label>   
+                
+            <input 
+                name="submit" 
+                type="submit" 
+                value="Search"
+            >
+        </form>
+        <div id="targetDiv"class="content"> 
+            <p name="reference">Admin output</p>
+        </div>
+    </body>
+</HTML>

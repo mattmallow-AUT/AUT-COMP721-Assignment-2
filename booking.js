@@ -43,8 +43,6 @@ function requestBooking(){
 
 		var obj = document.getElementById("targetDiv");
 
-        obj.innerHTML = "Hello From booking.js";
-
 		var requestbody = "customerName="+encodeURIComponent(customerName)
             +"&phoneNumber="+encodeURIComponent(phoneNumber)
             +"&unitNumber="+encodeURIComponent(unitNumber)
@@ -59,7 +57,6 @@ function requestBooking(){
 		xhr.onreadystatechange = function(){
             if(xhr.readyState === 4 && xhr.status === 200){
 				obj.innerHTML = xhr.responseText;
-                alert("Your booking has been accepted! Here is your reference number: ");
 			}
 		}//end anonymous call-back function
 		xhr.send(requestbody)
