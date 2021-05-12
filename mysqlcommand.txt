@@ -7,15 +7,15 @@ the command line, not in the code. Here are the list of sql queries
 I used in creating those tables:
 
 CREATE TABLE A2db(
-    bookingRefNo int PRIMARY KEY NOT NULL,
-    customerName text NOT NULL,
-    phoneNumber int,
-    uniNumber text,
-    streetNumber text,
-    streetName text,
-    suburb text,
-    destinationSuburb text,
-    pickUpDate date,
-    pickUpTime time,
-    status text
+    bookingRefNo INT NOT NULL PRIMARY KEY,
+    customerName TEXT NOT NULL,
+    phoneNumber INT(12) NOT NULL,
+    unitNumber TEXT,
+    streetNumber TEXT NOT NULL,
+    streetName TEXT NOT NULL,
+    suburb TEXT,
+    destinationSuburb TEXT,
+    pickUpDate DATE NOT NULL,
+    pickUpTime TIME NOT NULL,
+    status ENUM('assigned','unassigned') NOT NULL
 );

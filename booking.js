@@ -23,45 +23,44 @@ function getDate(){
 function getTime(){
     var time = today.getHours() + ":" + today.getMinutes();
     document.getElementById("displayTime").value = time;
-    //document.getElementById("displayTime").setAttribute("min", time);
+    document.getElementById("displayTime").setAttribute("min", time);
 }
 
 function requestBooking(){
-	const xhr = creatRequest();
+	const xhr = createRequest();
 
     if(xhr){
         //fetch the data from form
-        const customerName = document.getElementById("cname");
-        const phoneNumber = document.getElementById("phone");
-        const uniNumber = document.getElementById("unumber");
-        const streetNumber = document.getElementById("snumber");
-        const streetName = document.getElementById("stname");
-        const suburb = document.getElementById("sbname");
-        const destinationSuburb = document.getElementById("dsbname");
-        const pickUpDate = document.getElementById("date");
-        const pickUpTime = document.getElementById("time");
-        //const status = document.getElementById("cname");
+        const customerName = document.getElementById("cname").value;
+        const phoneNumber = document.getElementById("phone").value;
+        const unitNumber = document.getElementById("unumber").value;
+        const streetNumber = document.getElementById("snumber").value;
+        const streetName = document.getElementById("stname").value;
+        const suburb = document.getElementById("sbname").value;
+        const destinationSuburb = document.getElementById("dsbname").value;
+        const pickUpDate = document.getElementById("displayDate").value;
+        const pickUpTime = document.getElementById("displayTime").value;
 
 		var obj = document.getElementById("targetDiv");
-		var requestbody = "&cname="+encodeURIComponent(customerName)
-            +"&phone="+encodeURIComponent(phoneNumber)
-            +"&unumber="+encodeURIComponent(uniNumber)
-            +"&snumber="+encodeURIComponent(streetNumber)
-            +"&stname="+encodeURIComponent(streetName)
-            +"&sbname="+encodeURIComponent(suburb) 
-            +"&dsbname="+encodeURIComponent(destinationSuburb)
-            +"&date="+encodeURIComponent(pickUpDate)
-            +"&time="+encodeURIComponent(pickUpTime);
-		xhr.open("POST", "./booking.php", true);
+
+        obj.innerHTML = "Hello From booking.js";
+
+		var requestbody = "customerName="+encodeURIComponent(customerName)
+            +"&phoneNumber="+encodeURIComponent(phoneNumber)
+            +"&unitNumber="+encodeURIComponent(unitNumber)
+            +"&streetNumber="+encodeURIComponent(streetNumber)
+            +"&streetName="+encodeURIComponent(streetName)
+            +"&suburb="+encodeURIComponent(suburb) 
+            +"&destinationSuburb="+encodeURIComponent(destinationSuburb)
+            +"&pickUpDate="+encodeURIComponent(pickUpDate)
+            +"&pickUpTime="+encodeURIComponent(pickUpTime);
+		xhr.open("POST", './booking.php', true);
 		xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 		xhr.onreadystatechange = function(){
-			
-            if(xhr.readyState == 4 && xhr.status == 200){
+            if(xhr.readyState === 4 && xhr.status === 200){
 				obj.innerHTML = xhr.responseText;
                 alert("Your booking has been accepted! Here is your reference number: ");
-			} else {
-                alert("We are unable to book your cab at the moment, please try again.");
-            }
+			}
 		}//end anonymous call-back function
 		xhr.send(requestbody)
 	}

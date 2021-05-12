@@ -4,39 +4,64 @@
     
     //get mysqli connection to the databse
 	require_once("../../conf/settings.php");
-	$conn = @mysqli_connect($sql_host, $sql_user, $sql_pass, $sql_db)
-        or die("<p>Unable to connect to database and server</p>");
-    
-    // get name and password passed from client
-    $cname = $_POST['cname'];
-	$phone = $_POST['phone'];
-	$unumber = $_POST['unumber'];
-	$snumber = $_POST['snumber'];
-	$stname = $_POST['stname'];
-	$sbname = $_POST['sbname'];
-	$dsbname = $_POST['dsbname'];
-	$date = $_POST['date'];
-	$time = $_POST['time'];
-
-	$sql_table = "A2db";
-
+	require_once("./SQLfunction.php");
 	
-	//connect to table
-    
-    echo("Successfully connect to database");
+	date_default_timezone_set("Pacific/Auckland");
+	$conn = @mysqli_connect($sql_host, $sql_user, $sql_pass, $sql_db)
+		or die("<p>Unable to connect to database and server</p>");
 
-    //fetching from the database, then generate an unique reference number
-	$searchQuery = "SELECT * FROM $sql_table ORDER BY bookingRefNo DESC LIMIT 1";
-	$searchResult = @mysqli_query($conn, $searchQuery);
+	// get name and password passed from client
+	$customerName = $_POST['customerName'];
+	$phoneNumber = $_POST['phoneNumber'];
+	$unitNumber = $_POST['unitNumber'];
+	$streetNumber = $_POST['streetNumber'];
+	$streetName = $_POST['streetName'];
+	$suburb = $_POST['suburb'];
+	$destinationSuburb = $_POST['destinationSuburb'];
+	$pickUpDate = $_POST['pickUpDate'];
+	$pickUpTime = $_POST['pickUpTime'];
+	$status = 'unassigned';
+	$referenceNumber;
+	$sql_table = "A2db";
+	
+	//fetching from the database, then generate an unique reference number
+	$chechReference = checkReferenceFunction($conn, $sql_table);
 
-	if($searchResult->num_rows === 0)
-	{
-		echo("There are no data in the database at the moment!");
+	//assign reference number to entry
+	if($chechReference === 0) {
+		$referenceNumber = 1;
+		echo("Reference Number: $referenceNumber");
+	} else {
+		$referenceNumber = $chechReference+1;
+		echo("Reference Number: $referenceNumber");
 	}
-	else{
-        echo("Reference Number:1");
-    }
 
+	//format date and time to MySQL DATETIME
+	$pickUpDate = date('Y-m-d', strtotime($pickUpDate));
+	$pickUpTime = date('H:i:s', strtotime($pickUpTime));
+
+	echo("$pickUpDate and $pickUpTime");
+
+	if(book(
+		$conn, 
+		$sql_table, 
+		$referenceNumber, 
+		$customerName, 
+		$phoneNumber,
+		$unitNumber, 
+		$streetNumber,
+		$streetName,
+		$suburb,
+		$destinationSuburb,
+		$pickUpDate,
+		$pickUpTime,
+		$status
+	)) {
+		echo("<p>Thank you! Your booking reference number is $referenceNumber.</p>");
+		echo("<p>You will be picked up in front of your provided address at $pickUpTime on $pickUpDate</p>");
+	} else {
+		echo("<p>There is an issue with your booking. Please try again!");
+	}
+	
 	mysqli_close($conn);
-	// write back the password concatenated to end of the name
 ?>
