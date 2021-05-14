@@ -21,18 +21,11 @@
 	$pickUpDate = $_POST['pickUpDate'];
 	$pickUpTime = $_POST['pickUpTime'];
 	$status = 'unassigned';
-	$referenceNumber;
+	$referenceNumber = time() . rand(10*45, 100*98);
 	$sql_table = "A2db";
 	
-	//fetching from the database, then generate an unique reference number
-	$chechReference = checkReferenceFunction($conn, $sql_table);
-
-	//Generate Unique Reference Number
-	if($chechReference->num_rows === 0) {
-		$referenceNumber = 1;
-		echo("Reference Number: $referenceNumber");
-	} else {
-		$referenceNumber = getReference($conn, $sql_table) + 1;
+	while(!checkReference($conn, $sql_table, $referenceNumber)) {
+		$referenceNumber = time() . rand(10*45, 100*98);
 	}
 
 	//format date and time to MySQL DATETIME

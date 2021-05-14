@@ -7,7 +7,7 @@ the command line, not in the code. Here are the list of sql queries
 I used in creating those tables:
 
 CREATE TABLE A2db(
-    bookingRefNo INT NOT NULL PRIMARY KEY,
+    bookingRefNo VARCHAR(255) NOT NULL PRIMARY KEY,
     customerName TEXT NOT NULL,
     phoneNumber INT(12) NOT NULL,
     unitNumber TEXT,

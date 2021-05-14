@@ -52,7 +52,7 @@ function requestBooking(){
             +"&destinationSuburb="+encodeURIComponent(destinationSuburb)
             +"&pickUpDate="+encodeURIComponent(pickUpDate)
             +"&pickUpTime="+encodeURIComponent(pickUpTime);
-		xhr.open("POST", './booking.php', true);
+		xhr.open("POST", "./booking.php", true);
 		xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 		xhr.onreadystatechange = function(){
             if(xhr.readyState === 4 && xhr.status === 200){

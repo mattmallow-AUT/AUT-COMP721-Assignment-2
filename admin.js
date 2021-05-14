@@ -1,21 +1,25 @@
+function assignDriver(bookingRefNo) {
+    
+}
+
 function searchBooking(requestKeyword) {
     const xhr = createRequest();
-    //define the output array for retrieved data from database 
-    let bookings = [];
+    //let bookings = [];
 
     if(xhr) {
-        // Request Bookings
-        var targetLocation = document.getElementById("targetDiv");
-        var url = "admin.php?requestKeyword"+getElementById("bsearch").value;
+        var target = document.getElementById("targetDiv");
+        var url = "admin.php?requestKeyword="+requestKeyword;
         xhr.open("GET", url, true);
-        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+		xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         xhr.onreadystatechange = function() {
-            if (request.readyState == 4 && request.status == 200) {
-                bookings = request.responseText;
-                displayData(bookings);
+            //alert(xhr.readyState);
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                //target.innerHTML = "It is working!";
+                target.innerHTML = xhr.responseText;
+                //displayData(bookings);
             }
         }
-        request.send();
+        xhr.send(null);
     }
 }
 

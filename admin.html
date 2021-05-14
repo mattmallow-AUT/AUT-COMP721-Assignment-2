@@ -1,4 +1,4 @@
-<!--- file booking.html -->
+<!--- file admin.html -->
 <!DOCTYPE html>
 <HTML XMLns="http://www.w3.org/1999/xHTML"> 
     <head> 
@@ -9,11 +9,11 @@
         <meta name="description" content="CabsOnline - Your cab is right next to you."/>
         <meta name="author" content="Matthew Fan"/>
         <!--<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.2/css/bulma.min.css">-->
-        <script type="text/javascript" src="booking.js"></script>
+        <script type="text/javascript" src="admin.js"></script>
     </head> 
     
     <body>
-        <form action="javascript:searchBooking()">
+        <form>
             <H1>CabsOnline | Admin View</H1>
             <p>Your passenger is right next to you.</p>
                 
@@ -25,15 +25,19 @@
                     id="bsearch"
                 />
             </label>   
-                
+
             <input 
-                name="submit" 
-                type="submit" 
+                name="search" 
+                type="button" 
                 value="Search"
+                onclick="searchBooking(bsearch.value)"
             >
+
+            
+            </form>
         </form>
-        <div id="targetDiv"class="content"> 
-            <p name="reference">Admin output</p>
+        <div id="targetDiv" class="content"> 
+            <p>Admin output</p>
         </div>
     </body>
 </HTML>
