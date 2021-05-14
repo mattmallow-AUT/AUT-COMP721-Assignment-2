@@ -46,15 +46,19 @@
         }
     }
 
+    function printTable() {
+
+    }
+
     /** 
      * 
      * This function is returing the list of bookings made within 2 hours
      * from the current time. 
      * **/
-    function getBookingList($conn) {
+    function getBookingList($conn, $sql_table) {
         $bookingList = [];
 
-        $searchQuery = "SELECT * FROM A2db WHERE STATUS = 'unassigned' AND (pickUpTime <= (CURRENT_TIME() + INTERVAL 2 HOUR) AND pickUpTime >= CURRENT_TIME())";
+        $searchQuery = "SELECT * FROM $sql_table WHERE STATUS = 'unassigned' AND (pickUpTime <= (CURRENT_TIME() + INTERVAL 2 HOUR) AND pickUpTime >= CURRENT_TIME())";
 
         $result = mysqli_query($conn, $searchQuery);
 
@@ -68,17 +72,19 @@
             echo "<th>Destination Subrub</th>";
             echo "<th>Pick Up Date</th>";
             echo "<th>Pick Up Time</th>";
+            echo "<th>Assign</th>";
             echo "<tr>";
             while($row = $result->fetch_assoc()) {
+                $reference = "'".$row["bookingRefNo"]."'";
                 echo "<tr>";
-                echo "<th>" . $row["bookingRefNo"] . "</th>";
+                echo "<th>" . $reference . "</th>";
                 echo "<th>" . $row["customerName"] . "</th>";
                 echo "<th>" . $row["phoneNumber"] . "</th>";
                 echo "<th>" . $row["suburb"] . "</th>";
                 echo "<th>" . $row["destinationSuburb"] . "</th>";
                 echo "<th>" . $row["pickUpDate"] . "</th>";
                 echo "<th>" . $row["pickUpTime"] . "</th>";
-                echo "<th><input name=\"assign\" type=\"button\" value=\"assign taxi\" onclick=\"assignDriver(". $row["bookingRefNo"] .")\"/></th>";
+                echo "<th><input name=\"assign\" type=\"button\" value=\"assign taxi\" onclick=\"assignDriver($reference)\"/></th>";
                 echo "<tr>";
             }
         } else if(mysqli_num_rows($result) == 0) {
@@ -90,7 +96,19 @@
         //return $bookingList;
     }
 
-    function getSpecifiedBooking($conn, $requestKeyword) {
+    function getSpecifiedBooking($conn, $sql_table, $requestKeyword) {
 
+    }
+
+    function assignDriver($conn, $sql_table, $referenceNumber) {
+        $searchQuery = "UPDATE $sql_table SET status = 'assigned' WHERE bookingRefNo = $referenceNumber";
+        $result = mysqli_query($conn, $searchQuery);
+
+        // Return response
+        if ($result === true) {
+            echo("Booking $referenceNumber assigned.");
+        } else {
+            echo("Booking for $referenceNumber FAILED.");
+        }
     }
 ?>

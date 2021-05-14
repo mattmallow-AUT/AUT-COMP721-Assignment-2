@@ -1,11 +1,25 @@
 function assignDriver(bookingRefNo) {
-    
+    const xhr = createRequest();
+
+    if(xhr){
+        //fetch the data from form
+		var obj = document.getElementById("targetDiv");
+
+		var requestbody = "referenceNumber="+encodeURIComponent(bookingRefNo);
+		xhr.open("POST", "./admin.php", true);
+		xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+		xhr.onreadystatechange = function(){
+            if(xhr.readyState === 4 && xhr.status === 200){
+				obj.innerHTML = xhr.responseText;
+			}
+		}//end anonymous call-back function
+		xhr.send(requestbody)
+	}
 }
 
 function searchBooking(requestKeyword) {
     const xhr = createRequest();
     //let bookings = [];
-
     if(xhr) {
         var target = document.getElementById("targetDiv");
         var url = "admin.php?requestKeyword="+requestKeyword;
