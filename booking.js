@@ -41,7 +41,7 @@ function requestBooking(){
         const pickUpDate = document.getElementById("displayDate").value;
         const pickUpTime = document.getElementById("displayTime").value;
 
-		var obj = document.getElementById("targetDiv");
+		var obj = document.getElementsByName("reference");
 
 		var requestbody = "customerName="+encodeURIComponent(customerName)
             +"&phoneNumber="+encodeURIComponent(phoneNumber)
