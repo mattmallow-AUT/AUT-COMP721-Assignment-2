@@ -7,34 +7,97 @@
 
         <meta name="description" content="CabsOnline - Your cab is right next to you."/>
         <meta name="author" content="Matthew Fan"/>
-        <!--<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.2/css/bulma.min.css">-->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.2/css/bulma.min.css">
+        <link rel="apple-touch-icon" sizes="180x180" href="./favicon_io/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="./favicon_io/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="./favicon_io/favicon-16x16.png">
+        <link rel="manifest" href="./favicon_io/site.webmanifest">
         <script type="text/javascript" src="admin.js"></script>
     </head> 
     
     <body>
-        <form>
-            <H1>CabsOnline | Admin View</H1>
-            <p>Your passenger is right next to you.</p>
-                
-            <label>
-                Search Booking:
-                <input 
-                    type="text" 
-                    name="bsearch" 
-                    id="bsearch"
-                />
-            </label>   
+        <nav class="navbar is-primary" role="navigation" aria-label="main navigation">
+            <div class="navbar-brand">
+                <a class="navbar-item" href="booking.html">
+                    <img src="./logo.jpg" width="140px" height=auto>
+                </a>
+            </div>
+            
+            <div class="navbar-end">
+                <div class="navbar-item">
+                    <p class="control">
+                        <a href="booking.html" class="button is-primary">
+                            <span class="icon">
+                                <i class="fas fa-home"></i>
+                            </span>
+                        </a>
+                    </p>
 
-            <input 
-                name="search" 
-                type="button" 
-                value="Search"
-                onclick="searchBooking(bsearch.value)"
-            >
+                    <p class="control">
+                        <a href="admin.html" class="button is-primary">
+                            <span class="icon">
+                                <i class="fas fa-cog"></i>
+                            </span>
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </nav>
+
+        <div class="container is-fluid">
+            <form>
+                <H1 class="title">CabsOnline | Admin View</H1>
+                <h1 class="subtitle">Your passenger is right next to you.</h1>
+                
+                <div class="columns">
+                    <div class="column is-four-fifths">
+                        <label>
+                            Search Booking:
+                            <br>
+                            <p class="control has-icons-left">
+                                <input 
+                                    class="input is-rounded"
+                                    type="text" 
+                                    name="bsearch" 
+                                    id="bsearch"
+                                    placeholder="Enter a booking reference number or leave it blank"
+                                />
+                                <span class="icon is-left">
+                                    <i class="fas fa-search"></i>
+                                </span>
+                            </p>
+                        </label>
+                    </div>
+
+                    <div class="column is-one-fifths mt-3">
+                        <input 
+                            class="button is-rounded is-large"
+                            name="search" 
+                            type="button" 
+                            value="Search"
+                            onclick="searchBooking(bsearch.value)"
+                        />
+                    </div>
+                </div>
             </form>
-        </form>
-        <div id="targetDiv" class="content"> 
-            <p>Admin output</p>
+            <div id="targetDiv" class="content"> 
+                <table class="table mt-2 is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+                    <thead>
+                        <tr>
+                            <th>Booking Reference Number</th>
+                            <th>Customer Name</th>
+                            <th>Phone Number</th>
+                            <th>Pick Up Subrub</th>
+                            <th>Destination Subrub</th>
+                            <th>Pick Up Date</th>
+                            <th>Pick Up Time</th>
+                            <th>Assign</th>
+                        </tr>
+                    </thead>
+                    <div id="tableBody">No Data</div>
+                </table>
+            </div>
         </div>
     </body>
 </HTML>

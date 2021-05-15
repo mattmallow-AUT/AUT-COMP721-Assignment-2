@@ -18,25 +18,42 @@
     </head> 
     
     <body onload="getDate(); getTime()">
-        <div class="container is-fluid">
-            <nav class="navbar" role="navigation" aria-label="main navigation">
-                <div class="navbar-brand">
-                    <a class="navbar-item" href="booking.html">
-                        <img src="./logo.png" width=auto height=auto>
-                    </a>
-                </div>
-            </nav>
+        <nav class="navbar is-primary" role="navigation" aria-label="main navigation">
+            <div class="navbar-brand">
+                <a class="navbar-item" href="booking.html">
+                    <img src="./logo.jpg" width="140px" height=auto>
+                </a>
+            </div>
+            
+            <div class="navbar-end">
+                <div class="navbar-item">
+                    <p class="control">
+                        <a href="booking.html" class="button is-primary">
+                            <span class="icon">
+                                <i class="fas fa-home"></i>
+                            </span>
+                        </a>
+                    </p>
 
-            <div class="columns has-background-primary-light">
+                    <p class="control">
+                        <a href="admin.html" class="button is-primary">
+                            <span class="icon">
+                                <i class="fas fa-cog"></i>
+                            </span>
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </nav>
+
+        <div class="container is-fluid">
+            <div class="columns has-background-link-light">
                 <div class="column is-half">
                     <form action="javascript:requestBooking()">
                         <div class="columns mt-5">
                             <div class="column is-half">
                                 <H1 class="title">CabsOnline</H1>
                                 <h1 class="subtitle">Your cab is right next to you.</h1>
-                            </div>
-                            <div class="column is-half">
-                                <a href="admin.html" class="button is-primary">Settings</a>
                             </div>
                         </div>
 

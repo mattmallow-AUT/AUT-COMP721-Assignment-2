@@ -46,31 +46,25 @@
         }
     }
 
-    function printTable($result) {
-        echo "<table style=\"width:50%\">";
-        echo "<tr>";
-        echo "<th>Booking Reference Number</th>";
-        echo "<th>Customer Name</th>";
-        echo "<th>Phone Number</th>";
-        echo "<th>Pick Up Subrub</th>";
-        echo "<th>Destination Subrub</th>";
-        echo "<th>Pick Up Date</th>";
-        echo "<th>Pick Up Time</th>";
-        echo "<th>Assign</th>";
-        echo "<tr>";
+    function appendBookingList($bookingList, $result) {
         while($row = $result->fetch_assoc()) {
-            $reference = "'".$row["bookingRefNo"]."'";
-            echo "<tr>";
-            echo "<th>" . $reference . "</th>";
-            echo "<th>" . $row["customerName"] . "</th>";
-            echo "<th>" . $row["phoneNumber"] . "</th>";
-            echo "<th>" . $row["suburb"] . "</th>";
-            echo "<th>" . $row["destinationSuburb"] . "</th>";
-            echo "<th>" . $row["pickUpDate"] . "</th>";
-            echo "<th>" . $row["pickUpTime"] . "</th>";
-            echo "<th><input name=\"assign\" type=\"button\" value=\"assign taxi\" onclick=\"assignDriver($reference)\"/></th>";
-            echo "<tr>";
+            $bookingList = $row;
+            // $reference = "'".$row["bookingRefNo"]."'";
+            // echo "<tbody>";
+            // echo "<tr>";
+            // echo "<th>" . $reference . "</th>";
+            // echo "<th>" . $row["customerName"] . "</th>";
+            // echo "<th>" . $row["phoneNumber"] . "</th>";
+            // echo "<th>" . $row["suburb"] . "</th>";
+            // echo "<th>" . $row["destinationSuburb"] . "</th>";
+            // echo "<th>" . $row["pickUpDate"] . "</th>";
+            // echo "<th>" . $row["pickUpTime"] . "</th>";
+            // echo "<th><input class=\"button is-rounded is-large\" name=\"assign\" type=\"button\" value=\"assign taxi\" onclick=\"assignDriver($reference)\"/></th>";
+            // echo "</tr>";
+            // echo "</tbody>";
         }
+
+        return $bookingList;
     }
 
     /** 
@@ -83,8 +77,11 @@
 
         $result = mysqli_query($conn, $searchQuery);
 
+        $bookingList = [];
         if(mysqli_num_rows($result) >= 1){
-            printTable($result);
+            //append booking list
+            $bookingList = appendBookingList($bookingList, $result);
+            return $bookingList;
         } else if(mysqli_num_rows($result) == 0) {
             echo("No data match your query!");
         } else {
@@ -98,8 +95,11 @@
         $searchQuery = "SELECT * FROM $sql_table WHERE bookingRefNo = $requestKeyword";
         $result = mysqli_query($conn, $searchQuery);
 
+        $bookingList = [];
         if(mysqli_num_rows($result) == 1) {
-            printTable($result);
+            //append booking list
+            $bookingList = appendBookingList($bookingList, $result);
+            return $bookingList;
         } else if(mysqli_num_rows($result) == 0){
             echo("No data match the input reference number!");
         } else {
