@@ -2,7 +2,6 @@ function assignDriver(bookingRefNo) {
     const xhr = createRequest();
 
     if(xhr){
-        //fetch the data from form
 		var obj = document.getElementById("assignConfirmOutput");
 
 		var requestbody = "referenceNumber="+encodeURIComponent(bookingRefNo);
@@ -36,8 +35,10 @@ function appendBookingTable(bookingList) {
             eachRow.appendChild(createTableColumn(element.phoneNumber));
             eachRow.appendChild(createTableColumn(element.suburb));
             eachRow.appendChild(createTableColumn(element.destinationSuburb));
-            eachRow.appendChild(createTableColumn(element.pickUpDate));
-            eachRow.appendChild(createTableColumn(element.pickUpTime));
+            
+            dateTime = element.pickUpDate + " / " + element.pickUpTime;
+            eachRow.appendChild(createTableColumn(dateTime));
+            eachRow.appendChild(createTableColumn(element.status));
             eachRow.appendChild(createAssignButton(element.bookingRefNo));
             
             table.appendChild(eachRow);

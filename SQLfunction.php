@@ -71,7 +71,7 @@
      * from the current time. 
      * **/
     function getBookingList($conn, $sql_table) {
-        $searchQuery = "SELECT * FROM $sql_table WHERE STATUS = 'unassigned' AND (pickUpTime <= (CURRENT_TIME() + INTERVAL 2 HOUR) AND pickUpTime >= CURRENT_TIME())";
+        $searchQuery = "SELECT * FROM $sql_table WHERE STATUS = 'unassigned' AND (pickUpTime <= (CURRENT_TIME() + INTERVAL 2 HOUR) AND pickUpTime >= CURRENT_TIME()) AND pickUpDate = CURDATE()";
 
         $result = $conn->query($searchQuery);
 
