@@ -3,16 +3,16 @@ function assignDriver(bookingRefNo) {
 
     if(xhr){
         //fetch the data from form
-		var obj = document.getElementById("tableBody");
+		var obj = document.getElementById("assignConfirmOutput");
 
 		var requestbody = "referenceNumber="+encodeURIComponent(bookingRefNo);
 		xhr.open("POST", "./admin.php", true);
 		xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 		xhr.onreadystatechange = function(){
             if(xhr.readyState === 4 && xhr.status === 200){
-				//obj.innerHTML = xhr.responseText;
-                bookingList = xhr.responseText
-                appendBookingTable(bookingList);
+				//obj.appendChild(document.createTextNode(xhr.responseText));
+                obj.innerHTML = xhr.responseText;
+                searchBooking("");
             }
 		}//end anonymous call-back function
 		xhr.send(requestbody)
@@ -25,42 +25,59 @@ function appendBookingTable(bookingList) {
 
     if(bookingList.length === 0) {
         const eachRow = document.createElement("tr");
-        eachRow.appendChild(createColumn("No Booking Result"));
+        eachRow.appendChild(createTableColumn("No Booking Result match your input"));
         table.appendChild(eachRow);
     } else {
-        bookingList.forEach((bookingList) => {
+        bookingList.forEach(element => {
             const eachRow = document.createElement("tr");
-
-            eachRow.appendChild(createColumn(bookingList.bookingRefNo));
-            eachRow.appendChild(createColumn(bookingList.customerName));
-            eachRow.appendChild(createColumn(bookingList.phoneNumber));
-            eachRow.appendChild(createColumn(bookingList.suburb));
-            eachRow.appendChild(createColumn(bookingList.destinationSuburb));
-            eachRow.appendChild(createColumn(bookingList.pickUpDate));
-            eachRow.appendChild(createColumn(bookingList.pickUpTime));
-            eachRow.appendChild(createColumn(bookingList.suburb));
-        })
+    
+            eachRow.appendChild(createTableColumn(element.bookingRefNo));
+            eachRow.appendChild(createTableColumn(element.customerName));
+            eachRow.appendChild(createTableColumn(element.phoneNumber));
+            eachRow.appendChild(createTableColumn(element.suburb));
+            eachRow.appendChild(createTableColumn(element.destinationSuburb));
+            eachRow.appendChild(createTableColumn(element.pickUpDate));
+            eachRow.appendChild(createTableColumn(element.pickUpTime));
+            eachRow.appendChild(createAssignButton(element.bookingRefNo));
+            
+            table.appendChild(eachRow);
+        });
     }
 }
 
-function assignButton() {
-    
+function createTableColumn(element) {
+    const column = document.createElement("td");
+    column.appendChild(document.createTextNode(element));
+    return column;
+}
+
+function createAssignButton(referenceNumber) {
+    const column = document.createElement("td");
+    const button = document.createElement("input");
+    button.className = "button is-rounded is large";
+    button.name = "assign";
+    button.type="button";
+    button.value="assign taxi";
+    button.addEventListener("click", () => assignDriver(referenceNumber), false);
+    //button.onclick="assignDriver("+referenceNumber+")";
+    column.appendChild(button);
+    return column;
 }
 
 function searchBooking(requestKeyword) {
     const xhr = createRequest();
-    //let bookings = [];
+    let bookingList = [];
     if(xhr) {
-        var target = document.getElementById("tableBody");
+        var obj = document.getElementById("targetDiv");
         var url = "admin.php?requestKeyword="+requestKeyword;
         xhr.open("GET", url, true);
-		xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+		xhr.setRequestHeader("Content-Type", "application/json");
         xhr.onreadystatechange = function() {
             //alert(xhr.readyState);
             if (xhr.readyState == 4 && xhr.status == 200) {
-                //target.innerHTML = "It is working!";
-                target.innerHTML = xhr.responseText;
-                //displayData(bookings);
+                //obj.innerHTML = xhr.responseText;
+                bookingList = JSON.parse(xhr.responseText);
+                appendBookingTable(bookingList);
             }
         }
         xhr.send(null);

@@ -12,18 +12,15 @@
             $requestKeyword = $_GET['requestKeyword'];
 
             if(empty($requestKeyword)) {
-                //echo("The request body is empty");
-                getBookingList($conn, $sql_table);
+                echo getBookingList($conn, $sql_table);
             } else {
-                //echo("There are something in the body!");
-                getSpecifiedBooking($conn, $sql_table, $requestKeyword);
+                echo getSpecifiedBooking($conn, $sql_table, $requestKeyword);
             }
             break;
 
         case 'POST':
             $referenceNumber = $_POST['referenceNumber'];
 
-            //Check if reference was supplied
             if (!isset($referenceNumber)) {
                 echo("<p>A reference number is needed here</p>");
             } else {
@@ -32,7 +29,6 @@
             }
             break;
         default:
-            // Invalid HTTP Method
             echo("Invalid HTTP REQUEST");
             break;
     }

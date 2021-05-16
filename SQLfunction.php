@@ -63,8 +63,6 @@
             // echo "</tr>";
             // echo "</tbody>";
         }
-
-        return $bookingList;
     }
 
     /** 
@@ -75,20 +73,18 @@
     function getBookingList($conn, $sql_table) {
         $searchQuery = "SELECT * FROM $sql_table WHERE STATUS = 'unassigned' AND (pickUpTime <= (CURRENT_TIME() + INTERVAL 2 HOUR) AND pickUpTime >= CURRENT_TIME())";
 
-        $result = mysqli_query($conn, $searchQuery);
+        $result = $conn->query($searchQuery);
 
         $bookingList = [];
-        if(mysqli_num_rows($result) >= 1){
+        if($result->num_rows >= 1){
             //append booking list
-            $bookingList = appendBookingList($bookingList, $result);
-            return $bookingList;
-        } else if(mysqli_num_rows($result) == 0) {
-            echo("No data match your query!");
-        } else {
-            echo("Something went wrong");
+            //$bookingList = appendBookingList($bookingList, $result);
+            while($row = mysqli_fetch_assoc($result)) {
+                $bookingList[] = $row;
+            }
         }
-
-        //return $bookingList;
+        //echo '<pre>'; print_r($bookingList); echo '</pre>';
+        return json_encode($bookingList);
     }
 
     function getSpecifiedBooking($conn, $sql_table, $requestKeyword) {
@@ -98,13 +94,12 @@
         $bookingList = [];
         if(mysqli_num_rows($result) == 1) {
             //append booking list
-            $bookingList = appendBookingList($bookingList, $result);
-            return $bookingList;
-        } else if(mysqli_num_rows($result) == 0){
-            echo("No data match the input reference number!");
-        } else {
-            echo("Something went wrong");
+            //$bookingList = appendBookingList($bookingList, $result);
+            while($row = mysqli_fetch_assoc($result)) {
+                $bookingList[] = $row;
+            }
         }
+        return json_encode($bookingList);
     }
 
     function assignDriver($conn, $sql_table, $referenceNumber) {
