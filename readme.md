@@ -1,10 +1,8 @@
-# CabsOnline
-## This repo is for AUT COMP721-Web Development Assignment 2
+# CabsOnline - This repo is for AUT COMP721-Web Development Assignment 2
+> Cabs Online, your cab is right next to you
 
 ## purpose
 The purpose of this assignment is to demonstrate understanding on AJAX methodology for Web 2.0
-
-> Cabs Online, your cab is right next to you
 
 ---
 
