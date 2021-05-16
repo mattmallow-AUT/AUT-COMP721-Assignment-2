@@ -14,9 +14,9 @@ The purpose of this assignment is to demonstrate understanding on AJAX methodolo
     - booking.php: Converts HTTP request to database command.
 
 - Three files for admin page:
-    - admin.html: 
-    - admin.js:
-    - admin.php:
+    - admin.html: For display driver overview page
+    - admin.js: Handle AJAX call for admin.html
+    - admin.php: Converts HTTP request to database command.
 
 - Shared file:
     - SQLfunction.php: For constructing SQL queries and submit to MySQL database.
