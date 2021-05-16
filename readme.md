@@ -21,6 +21,15 @@ The purpose of this assignment is to demonstrate understanding on AJAX methodolo
 - Shared file:
     - SQLfunction.php: For constructing SQL queries and submit to MySQL database.
 
+- icon folder:
+    - consists of multiple icon files for different devices and different browsers
+
+- logo.png: The logo for this website
+
+- mysqlcommand.txt: The SQL command used in this project to create database table.
+
+---
+
 ## How to use this website?
 
 ### For passenger looking for a cab
