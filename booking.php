@@ -1,5 +1,12 @@
-<!--booking.php -->
 <?php
+	/**
+	 * Author: Matthew Fan
+	 * Student ID: 18040157
+	 * Description of File:
+     * This file connects to the database, and handle the user request from booking.html and booking.js
+	 * This will establish database connection.
+	 */
+
 	//check to see if the input field are assigned
     
     //get mysqli connection to the databse
@@ -10,7 +17,7 @@
 	$conn = @mysqli_connect($sql_host, $sql_user, $sql_pass, $sql_db)
 		or die("<p>Unable to connect to database and server</p>");
 
-	// get name and password passed from client
+	// get booking information from the user
 	$customerName = $_POST['customerName'];
 	$phoneNumber = $_POST['phoneNumber'];
 	$unitNumber = $_POST['unitNumber'];
@@ -21,9 +28,11 @@
 	$pickUpDate = $_POST['pickUpDate'];
 	$pickUpTime = $_POST['pickUpTime'];
 	$status = 'unassigned';
+	//generate a Unique reference number based on time
 	$referenceNumber = time() . rand(10*45, 100*98);
 	$sql_table = "A2db";
 	
+	//check if the reference number is unique in the database
 	while(!checkReference($conn, $sql_table, $referenceNumber)) {
 		$referenceNumber = time() . rand(10*45, 100*98);
 	}
@@ -31,8 +40,6 @@
 	//format date and time to MySQL DATETIME
 	$pickUpDate = date('Y-m-d', strtotime($pickUpDate));
 	$pickUpTime = date('H:i:s', strtotime($pickUpTime));
-
-	echo("<p>$pickUpDate and $pickUpTime</p>");
 
 	if(book(
 		$conn, 

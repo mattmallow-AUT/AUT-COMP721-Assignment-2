@@ -1,12 +1,12 @@
-# CabsOnline - This repo is for AUT COMP721-Web Development Assignment 2
-> Cabs Online, your cab is right next to you
+CabsOnline - This repo is for AUT COMP721-Web Development Assignment 2
+Cabs Online, your cab is right next to you
 
-## purpose
+
+purpose
 The purpose of this assignment is to demonstrate understanding on AJAX methodology for Web 2.0
 
----
 
-## Files
+Files in this folder:
 
 - Three files for booking page:
     - booking.html: For display the user booking page.
@@ -28,12 +28,10 @@ The purpose of this assignment is to demonstrate understanding on AJAX methodolo
 
 - mysqlcommand.txt: The SQL command used in this project to create database table.
 
----
 
-## How to use this website?
+How to use this website?
 
-### For passenger looking for a cab
-
+For passenger looking for a cab
 - Open the bookings.html
 - Enter the personal details to complete the bookings:
     - Customer Name (required)
@@ -52,8 +50,7 @@ The purpose of this assignment is to demonstrate understanding on AJAX methodolo
         The selected time must not be earlier than the current time
 - After filling in all the necessary field, you can now click "Book A Cab" button to send a booking request to the system server.
 
-### For driver looking for passenger
-
+For driver looking for passenger
 - Open admin.html
 - If you want to search for a specific booking
     - Enter a valid booking reference number in the search field
@@ -64,10 +61,10 @@ The purpose of this assignment is to demonstrate understanding on AJAX methodolo
 
 - After the above process, the tabel with the search result will be displayed. At the end of each entry in the table, there is a assign button for that specific booking request. You can assign yourself to a booking request by clicking the "assign taxi" button at the end of the entry. 
 
-### Addition Note
 
-## List of things out of scope for this assignment:
+Addition Note
 
+List of things out of scope for this assignment:
 - authentication
 - querying services for drivers
 - monitoring services
